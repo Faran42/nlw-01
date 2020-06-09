@@ -1,17 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-// JSX: Sintaxe de XML dentro do JavaScript
-
-import Header from './Header';
+import Routes from './routes';
 
 function App() {
-  return (         
-    <div>
-      <Header title='Hello World'/>
-
-      <h1>Conteúdo da aplicação</h1>
-    </div>          
+  return (       
+      <Routes />
   );
 }
 

@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import { Map, TileLayer, Marker } from 'react-leaflet'
+import { Map, TileLayer, Marker } from 'react-leaflet';
+import api from '../../services/api';
 
 import './styles.css';
 
 import logo from '../../assets/logo.svg';
-import { tileLayer } from 'leaflet';
+
+interface Item {
+  id: number;
+  title: string;
+  image_url: string;
+};
 
 const CreatePoint = () => {
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    api.get('items').then(response =>{
+      setItems(response.data); 
+    })
+  }, []);
+
   return (
     <div id="page-create-point">
       <header>
@@ -96,30 +110,12 @@ const CreatePoint = () => {
           </legend>
 
           <ul className="items-grid">
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
-            <li>
-              <img src="http://localhost:3333/uploads/oleo.svg" alt="Teste"/>
-              <span>Óleo de Cozihnha</span>
-            </li>
+            {items.map(items => (
+              <li key={items.id}>
+                <img src={items.image_url} alt={items.title}/>
+              <span>{items.title}</span>
+            </li> 
+            ))}           
           </ul>
         </fieldset>
 

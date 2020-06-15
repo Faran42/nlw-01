@@ -1,7 +1,8 @@
 import axios from 'axios';
+import baseUrl from './dynamicUrl'
 
 const api = axios.create({
-  baseURL: 'http://192.168.1.10:3333'
+  baseURL: `http://${baseUrl.baseUrl}:3333`
 });
 
 export default api;

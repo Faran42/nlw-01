@@ -1,0 +1,17 @@
+{
+	"name": "Armazém Tarsilla",
+	"email": "contato@tarsilastore.com.br",
+	"whatsapp": "84999431941",
+	"latitude": -6.028166,
+	"longitude": -37.990504,
+	"city": "Portalegre",
+	"uf": "RN",
+	"items": [		
+		1,
+		2,
+		3,
+		4,
+		5,
+		6
+	]
+}

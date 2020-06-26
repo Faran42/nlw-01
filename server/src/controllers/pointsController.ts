@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection'
-
 import baseUrl from '../../../mobile2/src/services/dynamicUrl'
 
 class PointsController {
@@ -23,7 +22,7 @@ class PointsController {
         const serializedPoints = points.map(point => {
             return {
                 ...point,
-                image_url: `http://${baseUrl}:3333/uploads/${point.image}`
+                image_url: `http://${baseUrl.baseUrl}:3333/uploads/${point.image}`
             }
         })    
 
@@ -45,13 +44,18 @@ class PointsController {
          * WHERE point_items.point_id = {id}
          */
 
+        const serializedPoint = {            
+                ...point,
+                image_url: `http://${baseUrl.baseUrl}:3333/uploads/${point.image}`
+        }
+
 
         const items = await knex('items')
             .join('point_items', 'items.id', '=', 'point_items.item_id')
             .where('point_items.point_id', id)
             .select('items.title');
 
-        return response.json({point, items});
+        return response.json({point: serializedPoint, items});
     }
     
     async create (request: Request, response: Response) {
